@@ -24,12 +24,33 @@ def nbrexpos(nbr):
                 lat = '$'+s[0]+ ',' +s.split('e')[0].split('.')[1].rstrip('0')+'.10^{'+ s.split('e')[1]+'}'+'$'
             else :
                 lat = '$'+s[0] +s.split('e')[0].split('.')[1].rstrip('0')+'.10^{'+ s.split('e')[1]+'}'+'$'
-    return lat, r
+    return lat
             
 
 
-def shownbr(nbr):
+def shownbr(i,nbr):
+    nbr = nbr
+    n = Float(str(nbr))
+    s = f"{S(StrPrinter({'full_prec': True}).doprint(n)):e}"
+    r = Rational(s)
+    cte = f"{S(StrPrinter({'full_prec': True}).doprint(Float(nbr))):e}".split('.')[0]
+    
+    
+    if nbr != 0 :
+        ctm = f"{S(StrPrinter({'full_prec': True}).doprint(Float(nbr))):e}".split('.')[1].split('e')[0].rstrip('0')
+        noe = f"{S(StrPrinter({'full_prec': True}).doprint(Float(nbr))):e}".split('.')[1].split('e')[1]
+        if ctm == '':
+            s = "${}{}e{}$".format(latex(cte), latex(ctm),latex(noe))
+            
+        else :
+            s = "${}.{}e{}$".format(latex(cte), latex(ctm),latex(noe))
+    else :
+        s = '$0$'
+    display(i, Latex(nbrexpos(nbr)))
 
-    display(nbrexpos(nbr)[1].evalf(Integer(log(nbrexpos(nbr)[1].q,10))),Latex(nbrexpos(nbr)[0]))
 
-shownbr((1-1e-7)**5)
+    
+malist = [S(f"{S(StrPrinter({'full_prec': True}).doprint(1e7*(1-1e-7)**i)):e}") for i in range(21)]
+
+for i  in range(21) :
+    shownbr(i,malist[i])
