@@ -34,14 +34,11 @@ def shownbr(i,nbr):
     s = f"{S(StrPrinter({'full_prec': True}).doprint(n)):e}"
     r = Rational(s)
     cte = f"{S(StrPrinter({'full_prec': True}).doprint(Float(nbr))):e}".split('.')[0]
-    
-    
     if nbr != 0 :
         ctm = f"{S(StrPrinter({'full_prec': True}).doprint(Float(nbr))):e}".split('.')[1].split('e')[0].rstrip('0')
         noe = f"{S(StrPrinter({'full_prec': True}).doprint(Float(nbr))):e}".split('.')[1].split('e')[1]
         if ctm == '':
-            s = "${}{}e{}$".format(latex(cte), latex(ctm),latex(noe))
-            
+            s = "${}{}e{}$".format(latex(cte), latex(ctm),latex(noe)) 
         else :
             s = "${}.{}e{}$".format(latex(cte), latex(ctm),latex(noe))
     else :
@@ -51,6 +48,7 @@ def shownbr(i,nbr):
 
     
 malist = [S(f"{S(StrPrinter({'full_prec': True}).doprint(1e7*(1-1e-7)**i)):e}") for i in range(21)]
+
 
 for i  in range(21) :
     shownbr(i,malist[i])
