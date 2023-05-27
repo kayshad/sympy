@@ -2,7 +2,8 @@
 from IPython.display import display, Latex
 from sympy import *
 init_printing(use_latex=True)
-from sympy.printing.str import StrPrinter
+
+
 def nbrexpos(nbr):
     nbr = nbr
     n = Float(str(nbr))
@@ -23,9 +24,9 @@ def nbrexpos(nbr):
                 lat = '$'+s[0]+ ',' +s.split('e')[0].split('.')[1].rstrip('0')+'.10^{'+ s.split('e')[1]+'}'+'$'
             else :
                 lat = '$'+s[0] +s.split('e')[0].split('.')[1].rstrip('0')+'.10^{'+ s.split('e')[1]+'}'+'$'
-    return lat
+    return lat, r
             
 
 #display(nbr,n,s,r,Latex(lat))
 #display(n,r.evalf(),Latex(lat))
-display(Latex(nbrexpos(1)))
+display(nbrexpos(1)[1].evalf(),Latex(nbrexpos(1)[0]))
