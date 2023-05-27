@@ -27,6 +27,9 @@ def nbrexpos(nbr):
     return lat, r
             
 
-#display(nbr,n,s,r,Latex(lat))
-#display(n,r.evalf(),Latex(lat))
-display(nbrexpos(1)[1].evalf(),Latex(nbrexpos(1)[0]))
+
+def shownbr(nbr):
+
+    display(nbrexpos(nbr)[1].evalf(Integer(log(nbrexpos(nbr)[1].q,10))),Latex(nbrexpos(nbr)[0]))
+
+shownbr((1-1e-7)**5)
